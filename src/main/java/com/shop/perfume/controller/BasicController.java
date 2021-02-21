@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BasicController {
 
-  @GetMapping("/")
-  public String home() {
-    return "Hello World!";
-  }
+//  @GetMapping("/")
+//  public String home() {
+//    return "Hello World!";
+//  }
 
   @GetMapping("/api/test")
   public String apiTest() {
