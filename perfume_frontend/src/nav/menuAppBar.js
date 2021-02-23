@@ -1,30 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
+import MainMenuItem from "./mainMenuItem.js";
+import MenuButton from "./menuButton.js";
+import MainMenu from "./mainMenu.js"
 
 export default function MenuAppBar() {
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  }));
+
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [menus, setMenus] = useState([
+    "About Us",
+    "Our Products",
+    "Services",
+    "FAQ",
+    "Contact Us",
+  ]);
   const open = Boolean(anchorEl);
+  
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,52 +42,90 @@ export default function MenuAppBar() {
     setAnchorEl(null);
   };
 
+  const handleMenuClick = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleLinkClick = () => {
+    setMenuOpen(false);
+  };
+
+  const styles = {
+    container: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      zIndex: "99",
+      opacity: 0.9,
+      display: "flex",
+      alignItems: "center",
+      background: "black",
+      width: "100%",
+      color: "white",
+      fontFamily: "Lobster",
+    },
+    logo: {
+      margin: "0 auto",
+    },
+    body: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      width: "100vw",
+      height: "100vh",
+      filter: { menuOpen } ? "blur(2px)" : null,
+      transition: "filter 0.5s ease",
+    },
+  };
+
+  const menuItems = menus.map((val, index) => {
+    return (
+      <MainMenuItem
+        key={index}
+        delay={`${index * 0.1}s`}
+        onClick={handleLinkClick}
+      >
+        {val}
+      </MainMenuItem>
+    );
+  });
+
   return (
-    <div className={classes.root}>
-      <AppBar position="static" color="primary">
-        <Toolbar>
+    <div>
+      <div style={styles.container}>
+        <MenuButton open={menuOpen} onClick={handleMenuClick} color="white" />
+        <div style={styles.logo}>Perfume Shop</div>
+        <div>
           <IconButton
-            edge="start"
-            className={classes.menuButton}
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
             color="inherit"
-            aria-label="menu"
           >
-            <MenuIcon />
+            <AccountCircle />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Perfume Shop
-          </Typography>
-          <div>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Log in</MenuItem>
-              <MenuItem onClick={handleClose}>Sign up</MenuItem>
-            </Menu>
-          </div>
-        </Toolbar>
-      </AppBar>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Log in</MenuItem>
+            <MenuItem onClick={handleClose}>Sign up</MenuItem>
+          </Menu>
+        </div>
+      </div>
+      <MainMenu open={menuOpen}>{menuItems}</MainMenu>
     </div>
   );
 }

@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: 'grey',
   },
 }));
 
@@ -58,7 +58,7 @@ export default function StaffCard() {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            C
           </Avatar>
         }
         action={
