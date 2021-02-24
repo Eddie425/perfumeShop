@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -17,33 +17,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import imageUrl from "../resource/product/images/perfume_black.png";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 1000,
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
-  },
-  expand: {
-    transform: "rotate(0deg)",
-    marginLeft: "auto",
-    transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: "rotate(180deg)",
-  },
-  avatar: {
-    backgroundColor: 'grey',
-  },
-}));
+export default function StaffDetail() {
+  const [product, setProduct] = useState(null);
+  const [staffId, setStaffId] = useState("0");
 
-export default function StaffCard() {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-  const [staffId, setStaffId] = React.useState("0");
+  
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

@@ -14,6 +14,6 @@ public class BasicController {
   @GetMapping("/api/test")
   public String apiTest() {
     System.out.println("HERE");
-    return "Perfume Shop";
+    return "";
   }
 }

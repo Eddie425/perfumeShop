@@ -4,9 +4,9 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MainMenuItem from "./mainMenuItem.js";
-import MenuButton from "./menuButton.js";
-import MainMenu from "./mainMenu.js"
+import MainMenuItem from "./mainMenu/mainMenuItem.js";
+import MenuButton from "./mainMenu/menuButton.js";
+import MainMenu from "./mainMenu/mainMenu.js"
 
 export default function MenuAppBar() {
   const useStyles = makeStyles((theme) => ({
