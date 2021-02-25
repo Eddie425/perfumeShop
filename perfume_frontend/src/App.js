@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Nav from "./nav/Nav.js";
+import Nav from "./nav/nav.js";
 import StaffCard from "./staff/StaffCard.js";
 import StaffDetail from "./staff/staffDetail/StaffDetail.js";
 import './App.css';
