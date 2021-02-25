@@ -1,6 +1,6 @@
 import "./nav.css";
 import React from "react";
-import MenuAppBar from "./menuAppBar.js";
+import MenuAppBar from "./MenuAppBar.js";
 
 class Nav extends React.Component {
     

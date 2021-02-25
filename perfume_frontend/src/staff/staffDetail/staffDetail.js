@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Colors from "./colors.js"
-import DetailsThumb from "./detailsThumb.js"
+import Colors from "./Colors.js"
+import DetailsThumb from "./DetailsThumb.js"
 import imageUrl from "../../resource/product/images/perfume_black.png";
 import imageUrl1 from "../../resource/product/images/perfume_black1.jpg";
 import imageUrl2 from "../../resource/product/images/perfume_black2.jpg";

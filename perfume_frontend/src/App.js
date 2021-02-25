@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Nav from "./nav/nav.js";
-import StaffCard from "./staff/staffCard.js";
-import StaffDetail from "./staff/staffDetail/staffDetail.js";
+import Nav from "./nav/Nav.js";
+import StaffCard from "./staff/StaffCard.js";
+import StaffDetail from "./staff/staffDetail/StaffDetail.js";
 import './App.css';
 
 class App extends Component {
