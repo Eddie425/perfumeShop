@@ -1,13 +1,29 @@
 import React, { Component } from "react";
-import Nav from "./nav/nav.js";
-import StaffCard from "./staff/staffCard.js";
+import Nav from "./nav/Nav.js";
+import StaffCard from "./staff/StaffCard.js";
+import StaffDetail from "./staff/staffDetail/StaffDetail.js";
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: null,
+      page: "home",
+    };
+  }
+
   state = {};
 
+  setPage(pageLocation) {
+    console.log("number => " + pageLocation);
+    this.setState({
+      page: pageLocation,
+    });
+  }
+
   componentDidMount() {
-    this.testApi();
+    // this.testApi();
   }
 
   testApi = () => {
@@ -19,11 +35,22 @@ class App extends Component {
   };
 
   render() {
+    let page;
+    let statePage = this.state.page;
+    if (this.state.page == null) {
+      page = <main>Loading...</main>;
+    } else {
+      if (statePage === "home") {
+        page = <StaffCard setPage={ this.setPage.bind(this) }/>;
+      } else {
+        page = <StaffDetail />;
+      }
+    }
     return (
       <div className="App">
-        <Nav />
+        <Nav setPage={this.setPage.bind(this)} />
         <header className="App-header">
-          <StaffCard />
+          {page}
           <h3 className="App-title">{this.state.message}</h3>
         </header>
       </div>

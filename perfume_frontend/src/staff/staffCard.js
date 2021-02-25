@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: "56.25%", // 16:9
+    cursor: "pointer"
   },
   expand: {
     transform: "rotate(0deg)",
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function StaffCard() {
+export default function StaffCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [staffId, setStaffId] = React.useState("0");
@@ -51,6 +52,7 @@ export default function StaffCard() {
 
   const handleStaffClick = (event) => {
     setStaffId(event.currentTarget.id);
+    props.setPage(event.currentTarget.id);
   };
 
   return (

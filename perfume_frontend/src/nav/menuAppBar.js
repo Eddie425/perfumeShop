@@ -4,11 +4,11 @@ import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MainMenuItem from "./mainMenu/mainMenuItem.js";
-import MenuButton from "./mainMenu/menuButton.js";
-import MainMenu from "./mainMenu/mainMenu.js"
+import MainMenuItem from "./mainMenu/MainMenuItem.js";
+import MenuButton from "./mainMenu/MenuButton.js";
+import MainMenu from "./mainMenu/MainMenu.js"
 
-export default function MenuAppBar() {
+export default function MenuAppBar(props) {
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -33,6 +33,9 @@ export default function MenuAppBar() {
   ]);
   const open = Boolean(anchorEl);
   
+  const setPage = () => {
+    props.setPage("home");
+  }
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -66,6 +69,7 @@ export default function MenuAppBar() {
     },
     logo: {
       margin: "0 auto",
+      cursor: "pointer",
     },
     body: {
       display: "flex",
@@ -94,7 +98,9 @@ export default function MenuAppBar() {
     <div>
       <div style={styles.container}>
         <MenuButton open={menuOpen} onClick={handleMenuClick} color="white" />
-        <div style={styles.logo}>Perfume Shop</div>
+        <div style={styles.logo} onClick={setPage}>
+          Perfume Shop
+        </div>
         <div>
           <IconButton
             aria-label="account of current user"
