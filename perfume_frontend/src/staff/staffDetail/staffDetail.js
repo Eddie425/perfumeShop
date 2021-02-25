@@ -61,7 +61,7 @@ export default function StaffDetail() {
               <h2>{item.title}</h2>
               <span>$ {item.price}</span>
             </div>
-            <Colors colors={item.colors} />
+            {/* <Colors colors={item.colors} /> */}
             <p>{item.description}</p>
             <p>{item.content}</p>
             <DetailsThumb images={item.src} tab={handleTab} myRef={ myRef }/>
