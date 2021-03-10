@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  datasource:
+#    url: jdbc:postgresql://localhost:5432/perfume_shop
+#    username: root
+#    password: Sonicgod5
+    url: postgres://cxxfbqvatnycqm:3a4968d03057c73969603d3fb5ff61898446996a46661d4c93a77cc1a9624fd4@ec2-34-194-215-27.compute-1.amazonaws.com:5432/ddqr3nnsimjvqc
+    username: cxxfbqvatnycqm
+    password: 3a4968d03057c73969603d3fb5ff61898446996a46661d4c93a77cc1a9624fd4
+    driverClassName: org.postgresql.Driver
+    initialization-mode: always

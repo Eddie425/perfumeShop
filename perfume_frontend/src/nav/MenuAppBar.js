@@ -7,6 +7,8 @@ import Menu from "@material-ui/core/Menu";
 import MainMenuItem from "./mainMenu/MainMenuItem.js";
 import MenuButton from "./mainMenu/MenuButton.js";
 import MainMenu from "./mainMenu/MainMenu.js"
+import { useDisclosure } from "@chakra-ui/core";
+import LoginForm from "../member/login.js"
 
 export default function MenuAppBar(props) {
   const useStyles = makeStyles((theme) => ({
@@ -21,9 +23,11 @@ export default function MenuAppBar(props) {
     },
   }));
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loginFormOpen, setLoginFormOpen] = useState(false);
   const [menus, setMenus] = useState([
     "About Us",
     "Our Products",
@@ -53,9 +57,18 @@ export default function MenuAppBar(props) {
     setMenuOpen(false);
   };
 
+  const openLoginForm = () => {
+    setLoginFormOpen(true);
+  };
+
+  const closeLoginForm = () => {
+    setLoginFormOpen(false);
+  };
+  
+
   const styles = {
     container: {
-      position: "absolute",
+      position: "fixed",
       top: 0,
       left: 0,
       zIndex: "99",
@@ -95,43 +108,49 @@ export default function MenuAppBar(props) {
   });
 
   return (
-    <div>
-      <div style={styles.container}>
-        <MenuButton open={menuOpen} onClick={handleMenuClick} color="white" />
-        <div style={styles.logo} onClick={setPage}>
-          Perfume Shop
+    <>
+      <div>
+        <div style={styles.container}>
+          <MenuButton open={menuOpen} onClick={handleMenuClick} color="white" />
+          <div style={styles.logo} onClick={setPage}>
+            Perfume Shop
+          </div>
+          <div>
+            <IconButton
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={openLoginForm}>Log in</MenuItem>
+              <MenuItem onClick={handleClose}>Sign up</MenuItem>
+            </Menu>
+          </div>
         </div>
-        <div>
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleClose}>Log in</MenuItem>
-            <MenuItem onClick={handleClose}>Sign up</MenuItem>
-          </Menu>
-        </div>
+        <MainMenu open={menuOpen}>{menuItems}</MainMenu>
       </div>
-      <MainMenu open={menuOpen}>{menuItems}</MainMenu>
-    </div>
+      <LoginForm
+        status={loginFormOpen}
+        close={closeLoginForm}
+      />
+    </>
   );
 }

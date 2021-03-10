@@ -2,7 +2,15 @@ import React, { Component } from "react";
 import Nav from "./nav/Nav.js";
 import StaffCard from "./staff/StaffCard.js";
 import StaffDetail from "./staff/staffDetail/StaffDetail.js";
+// import SignUpFrom from "./member/signup.js";
 import './App.css';
+// import { ChakraProvider } from "@chakra-ui/react";
+import {
+  ThemeProvider,
+  theme,
+  ColorModeProvider,
+  CSSReset,
+} from "@chakra-ui/core";
 
 class App extends Component {
   constructor(props) {
@@ -47,13 +55,21 @@ class App extends Component {
       }
     }
     return (
-      <div className="App">
-        <Nav setPage={this.setPage.bind(this)} />
-        <header className="App-header">
-          {page}
-          <h3 className="App-title">{this.state.message}</h3>
-        </header>
-      </div>
+      <ThemeProvider theme={theme}>
+        <ColorModeProvider>
+          <CSSReset />
+          <div className="App">
+            <Nav setPage={this.setPage.bind(this)} />
+
+            {/* <SignUpFrom /> */}
+            <header className="App-header">
+              {page}
+              <h3 className="App-title">{this.state.message}</h3>
+            </header>
+
+          </div>
+        </ColorModeProvider>
+      </ThemeProvider>
     );
   }
 }
