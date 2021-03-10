@@ -64,7 +64,7 @@ export default function LoginForm(props) {
               formControlProps={{
                 fullWidth: true,
               }}
-              onChange={(e) => setEmail(e.target.value)}
+              handleChange={(e) => setEmail(e.target.value)}
               type="text"
             />
             <CustomInput
@@ -73,7 +73,7 @@ export default function LoginForm(props) {
               formControlProps={{
                 fullWidth: true,
               }}
-              onChange={(e) => setPassword(e.target.value)}
+              handleChange={(e) => setPassword(e.target.value)}
               type="password"
             />
             <Button
