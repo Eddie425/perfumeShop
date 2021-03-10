@@ -22,15 +22,15 @@ export default function LoginForm(props) {
   const [password, setPassword] = useState("");
 
   const basicAuthorize = () => {
-    fetch("http://localhost:8080/api/login", {
+    fetch("https://perfumeshop.herokuapp.com/api/login", {
       headers: {
         Authorization: "Basic " + window.btoa(email + ":" + password),
       },
       method: "POST",
       body: {
         username: email,
-        password: password
-      }
+        password: password,
+      },
     }).then((resp) => {
       console.log(resp);
       if (resp.ok) {
