@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class JwtFilterConfig {
 
   @Bean
-  public FilterRegistrationBean logProcessTimeFilter() {
+  public FilterRegistrationBean<JwtRequestFilter> jwtFilter() {
     FilterRegistrationBean<JwtRequestFilter> bean = new FilterRegistrationBean<>();
     bean.setFilter(new JwtRequestFilter());
     bean.addUrlPatterns("/perfume/auth/**");
