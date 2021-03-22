@@ -4,65 +4,59 @@ import com.shop.perfume.model.Member;
 import com.shop.perfume.model.Orders;
 import com.shop.perfume.service.MemberService;
 import com.shop.perfume.service.OrdersService;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class OrdersController {
+public interface OrdersController extends AspectController {
 
-  final String API_PREFIX = "/perfume";
-  final String API_GET_ALL_ORDERS = API_PREFIX + "/orders/"; //登入
+  String API_PREFIX = API_PERFUME + "/orders";
 
-  @Autowired
-  private OrdersService ordersService;
+  String API_ORDERS = API_PREFIX + "/";
+  String API_ORDER_AND_ORDER_ID = API_PREFIX + "/{orderId}";
+  String API_UPDATE_ORDER = API_PREFIX + "/update/";
 
-  @GetMapping(value = API_GET_ALL_ORDERS)
-  public ResponseEntity<List<Orders>> listAllOrders() {
-    List<Orders> orders = ordersService.getAllOrders();
-    if (orders.isEmpty()) {
-      return new ResponseEntity<List<Orders>>(HttpStatus.NO_CONTENT);
-    }
 
-    return new ResponseEntity<>(orders, HttpStatus.OK);
+  @GetMapping(value = API_ORDERS)
+  default ResponseEntity<List<Orders>> listAllOrders() {
+    return new ResponseEntity<>(
+        Collections.singletonList(
+            Orders.builder().build()), HttpStatus.OK);
   }
 
-  @RequestMapping(value = "/orders/{orderId}", method = RequestMethod.GET, produces =
-      MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Orders> getOrder(@PathVariable("orderId") String orderId) {
-    Orders order = ordersService.getOrderById(orderId);
-    if (order == null) {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-    return new ResponseEntity<>(order, HttpStatus.OK);
+  @GetMapping(value = API_ORDER_AND_ORDER_ID,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  default ResponseEntity<Orders> getOrder(
+      @PathVariable("orderId") String orderId) {
+    return new ResponseEntity<>(Orders.builder().build(), HttpStatus.OK);
   }
 
-
-  @RequestMapping(value = "/order/", method = RequestMethod.POST)
-  public ResponseEntity<Orders> createOrder(@RequestBody Orders orderFe) {
-    return new ResponseEntity<Orders>(ordersService.createOrder(orderFe), HttpStatus.OK);
+  @PostMapping(value = API_ORDERS)
+  default ResponseEntity<Orders> createOrder(@RequestBody Orders orderFe) {
+    return new ResponseEntity<>(Orders.builder().build(), HttpStatus.OK);
   }
 
-  @RequestMapping(value = "/order/update/", method = RequestMethod.POST)
-  public ResponseEntity<Orders> UpdateOrder(@RequestBody Orders orderFe) {
-    return new ResponseEntity<Orders>(ordersService.updateOrder(orderFe), HttpStatus.OK);
+  @PostMapping(value = API_UPDATE_ORDER)
+  default ResponseEntity<Orders> UpdateOrder(@RequestBody Orders orderFe) {
+    return new ResponseEntity<>(Orders.builder().build(), HttpStatus.OK);
   }
 
-  @RequestMapping(value = "/order/{orderId}", method = RequestMethod.DELETE)
-  public ResponseEntity<Orders> deleteOrder(@PathVariable("orderId") String orderId) {
-    Orders order = ordersService.getOrderById(orderId);
-    if (order == null) {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-    ordersService.deleteOrder(order);
-    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  @DeleteMapping(value = API_ORDER_AND_ORDER_ID)
+  default ResponseEntity<Orders> deleteOrder(@PathVariable("orderId") String orderId) {
+    return new ResponseEntity<>(Orders.builder().build(), HttpStatus.OK);
   }
 }

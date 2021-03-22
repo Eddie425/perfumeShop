@@ -22,8 +22,8 @@ export default function LoginForm(props) {
   const [password, setPassword] = useState("");
 
   const basicAuthorize = () => {
-    // fetch("https://perfumeshop.herokuapp.com/api/login", {
-    fetch("http://localhost:8080/perfume/basic/authenticate", {
+    fetch("https://perfumeshop.herokuapp.com/perfume/auth/login", {
+    // fetch("http://localhost:8080/perfume/auth/login", {
       headers: {
         // Authorization: "Basic " + window.btoa(email + ":" + password),
         // "Access-Control-Allow-Origin": "*",

@@ -13,19 +13,6 @@ import AddressForm from "./AddressForm";
 import PaymentForm from "./PaymentForm";
 import Review from "./Review";
 
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center">
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://perfumeshop.herokuapp.com">
-//         Perfume Shop
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
-
 const useStyles = makeStyles((theme) => ({
   main: {
     marginBottom: theme.spacing(4),

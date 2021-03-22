@@ -8,8 +8,18 @@ import TWzipcode from "react-twzipcode";
 import "./order.css";
 
 export default function AddressForm() {
+  const [order, setOrder] = React.useState({
+    lastName: "",
+    firstName: "",
+    phone: "",
+    email: "",
+    city: "",
+    address: "",
+    postalCode: "",
+  });
   const handleChange = (data) => {
     console.log(data);
+    console.log(order);
   };
 
   return (
@@ -27,6 +37,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            value={order.lastName}
           />
         </Grid>
         <Grid item xs={6} sm={6}>
@@ -38,6 +49,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="given-name"
             variant="standard"
+            value={order.firstName}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -49,6 +61,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="cellphone"
             variant="standard"
+            value={order.phone}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -60,6 +73,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="email"
             variant="standard"
+            value={order.email}
           />
         </Grid>
         <TWzipcode
@@ -82,52 +96,9 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address"
             variant="standard"
+            value={order.address}
           />
         </Grid>
-        {/* <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="district"
-            name="district"
-            label="鄉鎮市區"
-            fullWidth
-            autoComplete="district"
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="縣市"
-            fullWidth
-            autoComplete="city"
-            variant="standard"
-          />
-        </Grid> */}
-        {/* <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="shipping postal-code"
-            variant="standard"
-          />
-        </Grid> */}
-        {/* <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="shipping country"
-            variant="standard"
-          />
-        </Grid> */}
         <Grid item xs={12}>
           <FormControlLabel
             control={
