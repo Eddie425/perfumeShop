@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Nav from "./nav/Nav.js";
 import StaffCard from "./staff/StaffCard.js";
 import StaffDetail from "./staff/staffDetail/StaffDetail.js";
+import CheckOut from "./order/CheckOut.js";
 // import SignUpFrom from "./member/signup.js";
 import './App.css';
 // import { ChakraProvider } from "@chakra-ui/react";
@@ -24,7 +25,7 @@ class App extends Component {
   state = {};
 
   setPage(pageLocation) {
-    console.log("number => " + pageLocation);
+    console.log("pageLocation => " + pageLocation);
     this.setState({
       page: pageLocation,
     });
@@ -48,10 +49,18 @@ class App extends Component {
     if (this.state.page == null) {
       page = <main>Loading...</main>;
     } else {
-      if (statePage === "home") {
-        page = <StaffCard setPage={ this.setPage.bind(this) }/>;
-      } else {
-        page = <StaffDetail />;
+      switch (statePage) {
+        case "home":
+          page = <StaffCard setPage={this.setPage.bind(this)} />;
+          break;
+        case "product":
+          page = <StaffDetail setPage={this.setPage.bind(this)} />;
+          break;
+        case "checkout":
+          page = <CheckOut />;
+          break;
+        default:
+          break;
       }
     }
     return (

@@ -1,8 +1,11 @@
 package com.shop.perfume.model;
 
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,16 +16,18 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product")
 public class Product {
 
     @Id
-    private String productID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long productId;
 
     private String productName;
 
-    private Integer categoryID;
+    private Integer categoryId;
 
     private String unitPrice;
-    
+
+    @OneToMany(mappedBy="product")
+    private Set<Orders> orders;
 }

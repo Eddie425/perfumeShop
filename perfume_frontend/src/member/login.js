@@ -4,7 +4,7 @@ import CustomInput from "./components/CustomInput";
 import Button from "./components/Button";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
-import "./login.css"
+import "./login.css";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -22,23 +22,29 @@ export default function LoginForm(props) {
   const [password, setPassword] = useState("");
 
   const basicAuthorize = () => {
-    fetch("https://perfumeshop.herokuapp.com/api/login", {
+    // fetch("https://perfumeshop.herokuapp.com/api/login", {
+    fetch("http://localhost:8080/perfume/basic/authenticate", {
       headers: {
-        Authorization: "Basic " + window.btoa(email + ":" + password),
+        // Authorization: "Basic " + window.btoa(email + ":" + password),
+        // "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json; charset=utf8",
+        credentials: "include",
       },
       method: "POST",
-      body: {
+      body: JSON.stringify({
         username: email,
         password: password,
-      },
-    }).then((resp) => {
-      console.log(resp);
-      if (resp.ok) {
-      } else {
-      }
-
-      return resp.text();
-    });
+      }),
+    })
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log("Error: " + err);
+      });
   };
 
   return (

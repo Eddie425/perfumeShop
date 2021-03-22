@@ -72,7 +72,7 @@ export default function StaffCard(props) {
         subheader="Paris"
       />
       <CardMedia
-        id="1"
+        id="product"
         className={classes.media}
         image={imageUrl}
         title="Paella dish"

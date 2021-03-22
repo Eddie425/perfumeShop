@@ -2,8 +2,11 @@ package com.shop.perfume.model;
 
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,15 +17,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "orders")
 public class Orders {
 
     @Id
-    private Integer orderID;
-
-    private String memberID;
-
-    private String productID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long orderId;
 
     private LocalDateTime orderDate;
 
@@ -35,5 +34,13 @@ public class Orders {
     private Boolean paid;
 
     private Integer orderStatus;
+
+    @ManyToOne
+    @JoinColumn(name="memberId", nullable=false)
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name="productId", nullable=false)
+    private Product product;
 
 }

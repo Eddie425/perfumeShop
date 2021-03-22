@@ -1,8 +1,14 @@
 package com.shop.perfume.model;
 
+import com.shop.perfume.common.UserRole;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,11 +21,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "member")
 public class Member {
 
     @Id
-    private String memberID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long memberId;
 
     private String password;
 
@@ -27,7 +33,7 @@ public class Member {
 
     private String lastName;
 
-    private LocalDateTime dateOfBirth;
+    private String dateOfBirth;
 
     private String email;
 
@@ -43,6 +49,9 @@ public class Member {
 
     private LocalDateTime registerTime;
 
-    private Integer userType;
+    private String roles;
+
+    @OneToMany(mappedBy="member")
+    private Set<Orders> orders;
 
 }
