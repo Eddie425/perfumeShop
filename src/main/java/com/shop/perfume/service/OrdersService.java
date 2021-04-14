@@ -8,7 +8,7 @@ public interface OrdersService {
   List<Orders> getAllOrders();
   Orders getOrderById(String ordersId);
 
-  Orders createOrder(Orders order);
+  Orders createAndPlaceOrder(Orders order);
 
   Orders updateOrder(Orders order);
 

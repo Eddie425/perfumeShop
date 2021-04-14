@@ -1,14 +1,12 @@
 package com.shop.perfume.service.impl;
 
-import com.shop.perfume.dao.MemberDao;
 import com.shop.perfume.dao.OrdersDao;
-import com.shop.perfume.model.Member;
 import com.shop.perfume.model.Orders;
-import com.shop.perfume.service.MemberService;
 import com.shop.perfume.service.OrdersService;
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,25 +22,21 @@ public class OrdersServiceImpl implements OrdersService {
 
   @Override
   public Orders getOrderById(String orderId) {
-    return ordersDao.getOrdersByOrderId(Integer.parseInt(orderId))
+    return ordersDao.findById(Integer.parseInt(orderId))
         .orElseThrow(() ->
             new RuntimeException("Order not found => OrderID : " + orderId));
   }
 
-//  @Override
-//  public Orders getMemberByEmail(String email) {
-//    return ordersDao.findAllById(email).orElseThrow(() ->
-//        new RuntimeException("Order not found => Email : " + email));
-//  }
-
   @Override
-  public Orders createOrder(Orders order) {
+  public Orders createAndPlaceOrder(Orders order) {
+    AllInOne allInOne = new AllInOne("src/main/resources");
+    AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
     return ordersDao.save(order);
   }
 
   @Override
-  public Orders updateOrder(Orders order) {
-    return null;
+  public Orders updateOrder(Orders order)  {
+    return ordersDao.save(order);
   }
 
   @Override

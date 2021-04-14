@@ -25,18 +25,18 @@ public class OrdersControllerImpl implements OrdersController {
   }
 
   @Override
-  public ResponseEntity<Orders> getOrder(String orderId) {
+  public ResponseEntity<Orders> createAndPlaceOrder(Orders orderFe) {
+    return new ResponseEntity<Orders>(
+        ordersService.createAndPlaceOrder(orderFe), HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<Orders> getOrderById(String orderId) {
     Orders order = ordersService.getOrderById(orderId);
     if (order == null) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     return new ResponseEntity<>(order, HttpStatus.OK);
-  }
-
-  @Override
-  public ResponseEntity<Orders> createOrder(Orders orderFe) {
-    return new ResponseEntity<Orders>(
-        ordersService.createOrder(orderFe), HttpStatus.OK);
   }
 
   @Override
@@ -46,7 +46,7 @@ public class OrdersControllerImpl implements OrdersController {
   }
 
   @Override
-  public ResponseEntity<Orders> deleteOrder(String orderId) {
+  public ResponseEntity<Orders> deleteOrderById(String orderId) {
     Orders order = ordersService.getOrderById(orderId);
     if (order == null) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);

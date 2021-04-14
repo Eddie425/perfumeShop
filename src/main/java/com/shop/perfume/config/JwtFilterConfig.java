@@ -11,7 +11,7 @@ public class JwtFilterConfig {
   public FilterRegistrationBean<JwtRequestFilter> jwtFilter() {
     FilterRegistrationBean<JwtRequestFilter> bean = new FilterRegistrationBean<>();
     bean.setFilter(new JwtRequestFilter());
-    bean.addUrlPatterns("/perfume/auth/**");
+    bean.addUrlPatterns("/perfume/**");
     bean.setName("JwtRequestFilter");
     return bean;
   }

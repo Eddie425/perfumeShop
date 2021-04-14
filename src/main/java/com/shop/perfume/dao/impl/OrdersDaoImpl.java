@@ -1,2 +1,7 @@
-package com.shop.perfume.dao.impl;public class OrdersDaoImpl {
-}
+//package com.shop.perfume.dao.impl;
+//
+//import com.shop.perfume.dao.OrdersDao;
+//
+//public class OrdersDaoImpl implements OrdersDao {
+//
+//}

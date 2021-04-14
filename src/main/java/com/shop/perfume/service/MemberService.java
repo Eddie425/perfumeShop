@@ -5,14 +5,16 @@ import java.util.List;
 
 public interface MemberService {
 
-  List<Member> getAllUsers();
+  List<Member> getAllMembers();
 
-  Member getMemberById(String memberID);
+  Member getMemberById(String memberId);
 
   Member getMemberByEmail(String email);
 
-  Member createUser(Member member);
+  Member createMember(Member member);
 
-  void deleteUserByMemberID(String memberID);
+  Member updateMember(Member member);
+
+  void deleteMember(Member member);
 
 }

@@ -27,8 +27,10 @@ public interface OrdersController extends AspectController {
   String API_PREFIX = API_PERFUME + "/orders";
 
   String API_ORDERS = API_PREFIX + "/";
-  String API_ORDER_AND_ORDER_ID = API_PREFIX + "/{orderId}";
-  String API_UPDATE_ORDER = API_PREFIX + "/update/";
+  String API_ORDER_CREATE = API_PREFIX + "/";
+  String API_ORDER_GET_BY_ID = API_PREFIX + "/{orderId}";
+  String API_ORDER_UPDATE = API_PREFIX + "/update/";
+  String API_ORDER_DELETE_BY_ID = API_PREFIX + "/{orderId}";
 
 
   @GetMapping(value = API_ORDERS)
@@ -38,25 +40,25 @@ public interface OrdersController extends AspectController {
             Orders.builder().build()), HttpStatus.OK);
   }
 
-  @GetMapping(value = API_ORDER_AND_ORDER_ID,
+  @PostMapping(value = API_ORDER_CREATE)
+  default ResponseEntity<Orders> createAndPlaceOrder(@RequestBody Orders orderFe) {
+    return new ResponseEntity<>(Orders.builder().build(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = API_ORDER_GET_BY_ID,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  default ResponseEntity<Orders> getOrder(
+  default ResponseEntity<Orders> getOrderById(
       @PathVariable("orderId") String orderId) {
     return new ResponseEntity<>(Orders.builder().build(), HttpStatus.OK);
   }
 
-  @PostMapping(value = API_ORDERS)
-  default ResponseEntity<Orders> createOrder(@RequestBody Orders orderFe) {
-    return new ResponseEntity<>(Orders.builder().build(), HttpStatus.OK);
-  }
-
-  @PostMapping(value = API_UPDATE_ORDER)
+  @PostMapping(value = API_ORDER_UPDATE)
   default ResponseEntity<Orders> UpdateOrder(@RequestBody Orders orderFe) {
     return new ResponseEntity<>(Orders.builder().build(), HttpStatus.OK);
   }
 
-  @DeleteMapping(value = API_ORDER_AND_ORDER_ID)
-  default ResponseEntity<Orders> deleteOrder(@PathVariable("orderId") String orderId) {
+  @DeleteMapping(value = API_ORDER_DELETE_BY_ID)
+  default ResponseEntity<Orders> deleteOrderById(@PathVariable("orderId") String orderId) {
     return new ResponseEntity<>(Orders.builder().build(), HttpStatus.OK);
   }
 }
